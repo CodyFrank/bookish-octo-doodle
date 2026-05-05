@@ -11,3 +11,11 @@ class RateLimiter:
         self.capacity = capacity
         self.clients = {}
         self.lock = threading.Lock()
+
+    def _get_or_create_client_state(self, client_id):
+        if client_id not in self.clients:
+            self.clients[client_id] = {
+                "tokens": self.capacity,
+                "last_updated": time.time(),
+            }
+        return self.clients[client_id]
