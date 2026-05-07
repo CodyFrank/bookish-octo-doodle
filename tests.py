@@ -1,3 +1,7 @@
+import time
+from RateLimiter import RateLimiter
+
+
 def simulate_client(client_id, limiter, requests_to_make):
     """Helper function to simulate a client making requests"""
     print(f"Client {client_id} attempting {requests_to_make} requests...")
@@ -18,7 +22,7 @@ if __name__ == "__main__":
     # CONFIGURATION:
     # Allow bursts of up to 5 requests (capacity)
     # Refill 1 token every 1 second (rate)
-    rate_limiter = SmartRateLimiter(rate=1.0, capacity=5)
+    rate_limiter = RateLimiter(rate=1.0, capacity=5)
 
     print("--- SCENARIO 1: Burst Traffic ---")
     # Client A tries to make 7 requests quickly
@@ -34,7 +38,7 @@ if __name__ == "__main__":
 
     print("\n--- SCENARIO 3: Concurrent Access (Threading) ---")
     # Create a new limiter for this test
-    busy_limiter = SmartRateLimiter(rate=0.5, capacity=2)  # Slow refill, small capacity
+    busy_limiter = RateLimiter(rate=0.5, capacity=2)  # Slow refill, small capacity
 
     def concurrent_request():
         result = (
