@@ -31,16 +31,29 @@ class RateLimiter:
                 self.capacity, client_state["tokens"] + elapsed * self.rate
             )
             client_state["last_updated"] = now
+            print(f"tokens = {self.clients[client_id]}")
 
-            print(1.0 - 1e-9)
             if client_state["tokens"] >= 1.0 - 1e-9:
                 client_state["tokens"] -= 1.0
-                print(f"tokens = {self.clients[client_id]}")
+                print("True")
                 return True
-            print(f"tokens = {self.clients[client_id]}")
+            print("False")
             return False
 
 
 rl = RateLimiter(1.0, 5.0)
 
+test = rl.is_allowed("test")
+test = rl.is_allowed("test")
+test = rl.is_allowed("test")
+test = rl.is_allowed("test")
+test = rl.is_allowed("test")
+test = rl.is_allowed("test")
+test = rl.is_allowed("test")
+test = rl.is_allowed("test")
+test = rl.is_allowed("test")
+
+time.sleep(1)
+test = rl.is_allowed("test")
+test = rl.is_allowed("test")
 test = rl.is_allowed("test")
